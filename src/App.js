@@ -4,6 +4,9 @@ import CategoryList from './CategoryList';
 import ProductList from './ProductList';
 import { Col, Container, Row } from 'reactstrap';// reactstrap paketini yükledik
 import alertify from "alertifyjs"
+import { Route, Switch } from 'react-router-dom'
+import NotFound from './NotFound';
+import CartList from './CartList';
 
 
 
@@ -45,9 +48,9 @@ export default class App extends Component {
     this.getProducts();
   }
 
-  removeFromCart=(product)=>{
-    let newCart = this.state.cart.filter(c=> c.product.id !== product.id)
-    this.setState({cart:newCart}) 
+  removeFromCart = (product) => {
+    let newCart = this.state.cart.filter(c => c.product.id !== product.id)
+    this.setState({ cart: newCart })
   }
 
   render() {
@@ -64,11 +67,30 @@ export default class App extends Component {
                 info={categoryInfo} />
             </Col>
             <Col xs="9">
-              <ProductList info={productInfo}
-                currentCategory={this.state.currentCategory}
-                products={this.state.products}
-                addToCart = {this.addToCart}
-              />
+              <Switch>
+                <Route exact path="/" render={props => (
+                  <ProductList
+                    {...props}
+                    info={productInfo}
+                    currentCategory={this.state.currentCategory}
+                    products={this.state.products}
+                    addToCart={this.addToCart}
+                  />
+                )
+
+                } />
+                <Route exact path="/cart" render={props => (
+                  <CartList
+                    {...props}
+                    cart={this.state.cart}
+                    removeFromCart={this.removeFromCart}
+                  />
+                )
+
+                } />
+                <Route component={NotFound} />
+              </Switch>
+
             </Col>
           </Row>
         </Container>
@@ -79,5 +101,6 @@ export default class App extends Component {
 }
 
 
-
-
+//<switch>: route'ları gezmeye işe yarar.
+//render: propları router ile ilgili yere gönderir.
+//{...props}: ile propların kopyası alınır.
