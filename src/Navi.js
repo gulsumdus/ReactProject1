@@ -7,10 +7,6 @@ import {
   Nav,
   NavItem,
   NavLink,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
   NavbarText
 } from 'reactstrap';
 import CartSummary from './CartSummary';
@@ -38,14 +34,12 @@ class Navi extends Component {
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="me-auto" navbar>
               <NavItem>
-                <NavLink href="/components/">Components</NavLink>
+                <NavLink href="/form1">Form Demo 1</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="https://github.com/reactstrap/reactstrap">
-                  GitHub
-                </NavLink>
+                <NavLink href="/form2">Form Demo 2</NavLink>
               </NavItem>
-              <CartSummary cart={this.props.cart} removeFromCart={this.props.removeFromCart}/>{/*Data dirilling(app.js'den CartSummary'e) */}
+              <CartSummary cart={this.props.cart} removeFromCart={this.props.removeFromCart} />{/*Data dirilling(app.js'den CartSummary'e) */}
             </Nav>
             <NavbarText>Simple Text</NavbarText>
           </Collapse>
